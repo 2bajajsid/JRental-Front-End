@@ -18,6 +18,10 @@ const mapDispatchToProps = dispatch => ({
         bodyFormData.set('lastname', user.lastname)
         bodyFormData.set('username', user.username)
         bodyFormData.set('email', user.email)
+        bodyFormData.set('num', user.num)
+        bodyFormData.set('address', user.address)
+        bodyFormData.set('bio', user.bio)
+        bodyFormData.set('pic', user.pic)
         axios.post('http://localhost:8080/jrental/v1/users', bodyFormData)
         .then((res) => {
             user.ID = res.data.ID
@@ -37,6 +41,10 @@ class RegistrationForm extends Component {
             lastname: "",
             email: "",
             username: "",
+            bio: "", 
+            address: "", 
+            num: "",
+            pic: "", 
             redirectToBasePage: false
         }
         this.firstNameChangeHandler = this.firstNameChangeHandler.bind(this)
@@ -70,21 +78,53 @@ class RegistrationForm extends Component {
         })
     }
 
+    bioChangeHandler = e => {
+        this.setState({
+            bio: e.target.value,
+        })
+    }
+
+    addressChangeHandler = e => {
+        this.setState({
+            address: e.target.value,
+        })
+    }
+
+    numChangeHandler = e => {
+        this.setState({
+            num: e.target.value,
+        })
+    }
+
+    picChangeHandler = e => {
+        this.setState({
+            pic: e.target.value, 
+        })
+    }
+
     submitHandler = e => {
         e.preventDefault()
-        const {firstname, lastname, email, username} = this.state
+        const {firstname, lastname, email, username, bio, address, num, pic} = this.state
         this.setState({
             firstname: "",
             lastname: "",
             username: "",
             email: "",
+            bio: "", 
+            address: "",
+            num: "", 
+            pic: "",
             redirectToBasePage: true
         })
         var user = {
             firstname, 
             lastname, 
             email, 
-            username
+            username,
+            bio,
+            address, 
+            num, 
+            pic
         }
         this.props.registerUser(user); 
     }
@@ -115,6 +155,22 @@ class RegistrationForm extends Component {
                     <br></br>
                     <TextField id="standard-email" name="email" label="Email"
                         value={this.state.email} onChange={this.emailChangeHandler}
+                        margin="normal" />
+                    <br></br>
+                    <TextField id="standard-bio" name="bio" label="bio"
+                        value={this.state.bio} onChange={this.bioChangeHandler}
+                        margin="normal" />
+                    <br></br>
+                    <TextField id="standard-address" name="address" label="address"
+                        value={this.state.address} onChange={this.addressChangeHandler}
+                        margin="normal" />
+                    <br></br>
+                    <TextField id="standard-address" name="num" label="phone number"
+                        value={this.state.num} onChange={this.numChangeHandler}
+                        margin="normal" />
+                    <br></br>
+                    <TextField id="standard-pic" name="pic" label="pic"
+                        value={this.state.pic} onChange={this.picChangeHandler}
                         margin="normal" />
                     <br></br>
                     <Button type="submit" variant="contained" color="primary">

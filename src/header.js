@@ -8,7 +8,7 @@ import Button from '@material-ui/core/Button';
 import {connect} from "react-redux"; 
 
 function mapStateToProps(state){
-    return {username: state.username }
+    return {u: state.u }
 }
 
 const useStyles = makeStyles(theme => ({
@@ -35,7 +35,7 @@ function ButtonAppBar(props) {
               <Button color="inherit">
                 <Link to='/register'>Sign Up</Link>
               </Button>
-              {props.username ? (<Button color="inherit">
+              {props.u ? (<Button color="inherit">
                 <Link to='/addProduct'>Add a Rental</Link>
               </Button>) : null}
             </Toolbar>

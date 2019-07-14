@@ -2,7 +2,7 @@ import ACTIONS from './action';
 const axios = require('axios');
 
 const defaultState = {
-    items: []
+    productIDList: []
 }
 
 const userReducer = (state = defaultState, action) => {
@@ -11,8 +11,7 @@ const userReducer = (state = defaultState, action) => {
             let user = action.user; 
             return {
                 ...state,
-                username: user.username,
-                ID: user.ID
+                u: user
             }
         }
 
@@ -20,7 +19,7 @@ const userReducer = (state = defaultState, action) => {
             let product = action.product; 
             return {
                 ...state,
-                productId: product.ID
+                productIDList: [...state.productIDList, product]
             }
         }
 

@@ -20,9 +20,9 @@ const mapDispatchToProps = (dispatch, props) => ({
         bodyFormData.set('location', p.location)
         bodyFormData.set('priceperday', p.pricePerDay)
         bodyFormData.set('pic', p.pic)
-        bodyFormData.set('id', props.ID)
+        bodyFormData.set('id', p.id)
 
-        axios.post(`http://localhost:8080/jrental/v1/user/${props.ID}/products`, bodyFormData)
+        axios.post(`http://localhost:8080/jrental/v1/user/${p.id}/products`, bodyFormData)
         .then((res) => {
             console.log(res)
             p.ID = res.data.ID
@@ -51,6 +51,8 @@ class ProductForm extends Component {
         this.setState({
             title: e.target.value,
         })
+        console.log("Props")
+        console.log(this.props)
     }
 
     locationChangeHandler = e => {
@@ -73,12 +75,13 @@ class ProductForm extends Component {
 
     submitHandler = e => {
         e.preventDefault()
-        const {title, location, priceperday, pic} = this.state; 
+        const {title, location, pricePerDay, pic} = this.state; 
         var p = {
             title, 
             location, 
-            priceperday, 
-            pic
+            pricePerDay, 
+            pic,
+            id: this.props.ID
         }
         this.setState({
             title: "",
